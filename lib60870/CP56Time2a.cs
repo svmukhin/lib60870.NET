@@ -22,6 +22,7 @@
  */
 
 using System;
+using System.Linq;
 
 namespace lib60870
 {
@@ -74,7 +75,10 @@ namespace lib60870
 
         public override int GetHashCode()
         {
-            return encodedValue.GetHashCode();
+            return encodedValue.Aggregate(new HashCode(), (hash, i) => {
+                hash.Add(i);
+                return hash;
+            }).ToHashCode();
         }
 
         /// <summary>
