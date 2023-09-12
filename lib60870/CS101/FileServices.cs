@@ -223,7 +223,7 @@ namespace lib60870.CS101
     internal class FileClient
     {
         private FileClientState state = FileClientState.IDLE;
-        private Master master;
+        private IMaster master;
 
         private int ca;
         private int ioa;
@@ -244,7 +244,7 @@ namespace lib60870.CS101
         private long timeout = 3000;
         private long lastSentTime = 0;
 
-        public FileClient(Master master, DebugLogger debugLog)
+        public FileClient(IMaster master, DebugLogger debugLog)
         {
             this.master = master;
             DebugLog = debugLog;
@@ -284,7 +284,7 @@ namespace lib60870.CS101
 
             DebugLog ("Send LAST SEGMENT (NoS=" + numberOfSection + ")");
 
-            master.SendASDU (fileAsdu);
+            master.Send (fileAsdu);
         }
 
         private byte CalculateChecksum (byte [] data)
@@ -317,7 +317,7 @@ namespace lib60870.CS101
 
                 lastSentTime = SystemUtils.currentTimeMillis ();
 
-                master.SendASDU (fileAsdu);
+                master.Send (fileAsdu);
 
                 sectionChecksum += CalculateChecksum (segmentData); 
 
@@ -342,7 +342,7 @@ namespace lib60870.CS101
         {
             ASDU deactivateFile = NewAsdu(new FileCallOrSelect(ioa, nof, 0, SelectAndCallQualifier.DEACTIVATE_FILE));
 
-            master.SendASDU(deactivateFile);
+            master.Send(deactivateFile);
 
             lastSentTime = SystemUtils.currentTimeMillis ();
 
@@ -393,7 +393,7 @@ namespace lib60870.CS101
                         currentSectionSize = fileProvider.GetSectionSize (0);
 
                         ASDU sectionReady = NewAsdu (new SectionReady (ioa, nof, 1, currentSectionSize, false));
-                        master.SendASDU (sectionReady);
+                        master.Send (sectionReady);
 
                         lastSentTime = SystemUtils.currentTimeMillis ();
 
@@ -439,7 +439,7 @@ namespace lib60870.CS101
                             /* send call file */
 
                             ASDU callFile = NewAsdu (new FileCallOrSelect (ioa, nof, 0, SelectAndCallQualifier.REQUEST_FILE));
-                            master.SendASDU (callFile);
+                            master.Send (callFile);
 
                             lastSentTime = SystemUtils.currentTimeMillis ();
 
@@ -497,7 +497,7 @@ namespace lib60870.CS101
                         DebugLog ("Received SECTION READY(NoF=" + sc.NOF + ", NoS=" + sc.NameOfSection + ")");
 
                         ASDU callSection = NewAsdu (new FileCallOrSelect (ioa, nof, sc.NameOfSection, SelectAndCallQualifier.REQUEST_SECTION));
-                        master.SendASDU (callSection);
+                        master.Send (callSection);
 
                         lastSentTime = SystemUtils.currentTimeMillis ();
 
@@ -571,7 +571,7 @@ namespace lib60870.CS101
                                 DebugLog ("checksum check failed! Send SEGMENT NACK");
                             }
 
-                            master.SendASDU (segmentAck);
+                            master.Send (segmentAck);
 
                             lastSentTime = SystemUtils.currentTimeMillis ();
 
@@ -591,7 +591,7 @@ namespace lib60870.CS101
                         if (state == FileClientState.WAITING_FOR_SECTION_READY) {
                             ASDU fileAck = NewAsdu (new FileACK (ioa, nof, lastSection.NameOfSection, AcknowledgeQualifier.POS_ACK_FILE, FileError.DEFAULT));
 
-                            master.SendASDU (fileAck);
+                            master.Send (fileAck);
 
                             lastSentTime = SystemUtils.currentTimeMillis ();
 
@@ -632,7 +632,7 @@ namespace lib60870.CS101
                                 currentSectionOffset = 0;
 
                                 ASDU sectionReady = NewAsdu (new SectionReady (ioa, nof, (byte)numberOfSection, currentSectionSize, false));
-                                master.SendASDU (sectionReady);
+                                master.Send (sectionReady);
 
                                 lastSentTime = SystemUtils.currentTimeMillis ();
 
@@ -640,7 +640,7 @@ namespace lib60870.CS101
                             } else {
 
                                 ASDU lastSection = NewAsdu (new FileLastSegmentOrSection (ioa, nof, (byte)numberOfSection, LastSectionOrSegmentQualifier.FILE_TRANSFER_WITHOUT_DEACT, fileChecksum));
-                                master.SendASDU (lastSection);
+                                master.Send (lastSection);
 
                                 lastSentTime = SystemUtils.currentTimeMillis ();
 
@@ -723,7 +723,7 @@ namespace lib60870.CS101
 
             ASDU selectFile = NewAsdu(new FileCallOrSelect(ioa, nof, 0, SelectAndCallQualifier.SELECT_FILE));
 
-            master.SendASDU(selectFile);
+            master.Send(selectFile);
 
             lastSentTime = SystemUtils.currentTimeMillis ();
 
@@ -739,7 +739,7 @@ namespace lib60870.CS101
 
             ASDU fileReady = NewAsdu (new FileReady (ioa, nof, fileProvider.GetFileSize (), true));
 
-            master.SendASDU (fileReady);
+            master.Send (fileReady);
 
             lastSentTime = SystemUtils.currentTimeMillis ();
 

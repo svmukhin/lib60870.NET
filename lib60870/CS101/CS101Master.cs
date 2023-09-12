@@ -590,7 +590,7 @@ namespace lib60870.CS101
             EnqueueUserData(controlCommand);
         }
 
-        public override void SendASDU(ASDU asdu)
+        public override void Send(ASDU asdu)
         {
             EnqueueUserData(asdu);
         }

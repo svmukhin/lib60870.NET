@@ -33,7 +33,7 @@ namespace lib60870.CS101
     /// <summary>
     /// Common interface for CS104 and CS101 balanced and unbalanced master
     /// </summary>
-    public abstract class Master
+    public abstract class Master : IMaster
     {
 
         protected bool debugOutput;
@@ -150,7 +150,7 @@ namespace lib60870.CS101
         /// Sends an arbitrary ASDU to the connected slave
         /// </summary>
         /// <param name="asdu">The ASDU to send</param>
-        public abstract void SendASDU(ASDU asdu);
+        public abstract void Send(ASDU asdu);
 
 
         /// <summary>
@@ -192,6 +192,19 @@ namespace lib60870.CS101
         public abstract void SetSentRawMessageHandler(RawMessageHandler handler, object parameter);
 
     }
-		
+    public interface IMaster
+    {
+        /// <summary>
+        /// Sends an arbitrary ASDU to the connected slave
+        /// </summary>
+        /// <param name="asdu">The ASDU to send</param>
+        void Send(ASDU asdu);
+
+        /// <summary>
+        /// Get the application layer parameters used by this master instance
+        /// </summary>
+        /// <returns>used application layer parameters</returns>
+        ApplicationLayerParameters GetApplicationLayerParameters();
+    }
 }
 
