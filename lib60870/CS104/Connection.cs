@@ -44,46 +44,46 @@ namespace lib60870.CS104
         /// <summary>
         /// The connection has been opened
         /// </summary>
-        OPENED = 0,
+        Opened = 0,
 
         /// <summary>
         /// The connection has been closed
         /// </summary>
-        CLOSED = 1,
+        Closed = 1,
 
         /// <summary>
         /// Conformation of START DT command received (server will send and accept application layer messages)
         /// </summary>
-        STARTDT_CON_RECEIVED = 2,
+        StartDtConReceived = 2,
 
         /// <summary>
         /// Conformation of STOP DT command received (server will no longer send or accept application layer messages)
         /// </summary>
-        STOPDT_CON_RECEIVED = 3,
+        StopDtConReceived = 3,
         
         /// <summary>
         /// The connect attempt has failed
         /// </summary>
-        CONNECT_FAILED = 4
+        ConnectFailed = 4
     }
 
     /// <summary>
     /// Provides some Connection statistics.
     /// </summary>
-    public class ConnectionStatistics
+    public class SessionStatistics
     {
 
-        private int sentMsgCounter = 0;
-        private int rcvdMsgCounter = 0;
-        private int rcvdTestFrActCounter = 0;
-        private int rcvdTestFrConCounter = 0;
+        private int _sentMsgCounter;
+        private int _rcvdMsgCounter;
+        private int _rcvdTestFrActCounter;
+        private int _rcvdTestFrConCounter;
 
         internal void Reset()
         {
-            sentMsgCounter = 0;
-            rcvdMsgCounter = 0;
-            rcvdTestFrActCounter = 0;
-            rcvdTestFrConCounter = 0;
+            _sentMsgCounter = 0;
+            _rcvdMsgCounter = 0;
+            _rcvdTestFrActCounter = 0;
+            _rcvdTestFrConCounter = 0;
         }
 
         /// <summary>
@@ -94,11 +94,11 @@ namespace lib60870.CS104
         {
             get
             {
-                return this.sentMsgCounter;
+                return _sentMsgCounter;
             }
             internal set
             {
-                this.sentMsgCounter = value;
+                _sentMsgCounter = value;
             }
         }
 
@@ -110,11 +110,11 @@ namespace lib60870.CS104
         {
             get
             {
-                return this.rcvdMsgCounter;
+                return _rcvdMsgCounter;
             }
             internal set
             {
-                this.rcvdMsgCounter = value;
+                _rcvdMsgCounter = value;
             }
         }
 
@@ -126,11 +126,11 @@ namespace lib60870.CS104
         {
             get
             {
-                return this.rcvdTestFrActCounter;
+                return _rcvdTestFrActCounter;
             }
             internal set
             {
-                this.rcvdTestFrActCounter = value;
+                _rcvdTestFrActCounter = value;
             }
         }
 
@@ -142,11 +142,11 @@ namespace lib60870.CS104
         {
             get
             {
-                return this.rcvdTestFrConCounter;
+                return _rcvdTestFrConCounter;
             }
             internal set
             {
-                this.rcvdTestFrConCounter = value;
+                _rcvdTestFrConCounter = value;
             }
         }
     }
@@ -335,7 +335,7 @@ namespace lib60870.CS104
                 Console.WriteLine("CS104 MASTER CONNECTION " + connectionID + ": " + message);
         }
 
-        private ConnectionStatistics statistics = new ConnectionStatistics();
+        private SessionStatistics statistics = new SessionStatistics();
 
         private void ResetConnection()
         {
@@ -769,7 +769,7 @@ namespace lib60870.CS104
         /// Gets the conenction statistics.
         /// </summary>
         /// <returns>The connection statistics.</returns>
-        public ConnectionStatistics GetStatistics()
+        public SessionStatistics GetStatistics()
         {
             return this.statistics;
         }
@@ -978,7 +978,7 @@ namespace lib60870.CS104
         /// Sends an arbitrary ASDU to the connected slave
         /// </summary>
         /// <param name="asdu">The ASDU to send</param>
-        public override void SendASDU(ASDU asdu)
+        public override void Send(ASDU asdu)
         {
             SendASDUInternal(asdu);
         }
@@ -1426,7 +1426,7 @@ namespace lib60870.CS104
                     DebugLog("RCVD STARTDT_CON");
 
                     if (connectionHandler != null)
-                        connectionHandler(connectionHandlerParameter, ConnectionEvent.STARTDT_CON_RECEIVED);
+                        connectionHandler(connectionHandlerParameter, ConnectionEvent.StartDtConReceived);
 
                 }
                 else if (buffer[2] == 0x23)
@@ -1434,7 +1434,7 @@ namespace lib60870.CS104
                     DebugLog("RCVD STOPDT_CON");
 
                     if (connectionHandler != null)
-                        connectionHandler(connectionHandlerParameter, ConnectionEvent.STOPDT_CON_RECEIVED);
+                        connectionHandler(connectionHandlerParameter, ConnectionEvent.StopDtConReceived);
                 }
 
             }
@@ -1757,7 +1757,7 @@ namespace lib60870.CS104
                         connecting = false;
 
                         if (connectionHandler != null)
-                            connectionHandler(connectionHandlerParameter, ConnectionEvent.OPENED);
+                            connectionHandler(connectionHandlerParameter, ConnectionEvent.Opened);
 
                     }
                     catch (SocketException se)
@@ -1769,7 +1769,7 @@ namespace lib60870.CS104
                         lastException = se;
 
                         if (connectionHandler != null)
-                            connectionHandler(connectionHandlerParameter, ConnectionEvent.CONNECT_FAILED);
+                            connectionHandler(connectionHandlerParameter, ConnectionEvent.ConnectFailed);
                     }
 
                     if (running)
@@ -1880,7 +1880,7 @@ namespace lib60870.CS104
                         netStream.Dispose();
 
                         if (connectionHandler != null)
-                            connectionHandler(connectionHandlerParameter, ConnectionEvent.CLOSED);
+                            connectionHandler(connectionHandlerParameter, ConnectionEvent.Closed);
                     }
 
                 }
@@ -2025,7 +2025,7 @@ namespace lib60870.CS104
 
             getDirectoryAsdu.AddInformationObject(io);
 
-            SendASDU(getDirectoryAsdu);
+            Send(getDirectoryAsdu);
         }
     }
 }

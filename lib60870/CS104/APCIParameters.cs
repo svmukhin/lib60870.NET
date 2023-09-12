@@ -48,14 +48,15 @@ namespace lib60870.CS104
 
         public APCIParameters Clone()
         {
-            APCIParameters copy = new APCIParameters();
-
-            copy.k = k;
-            copy.w = w;
-            copy.t0 = t0;
-            copy.t1 = t1;
-            copy.t2 = t2;
-            copy.t3 = t3;
+            APCIParameters copy = new APCIParameters
+            {
+                k = k,
+                w = w,
+                t0 = t0,
+                t1 = t1,
+                t2 = t2,
+                t3 = t3
+            };
 
             return copy;
         }

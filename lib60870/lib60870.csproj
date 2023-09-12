@@ -58,6 +58,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CS104\AsduReceivedEventArgs.cs" />
+    <Compile Include="CS104\FormatIMessage.cs" />
+    <Compile Include="CS104\FormatSMessage.cs" />
+    <Compile Include="CS104\FormatUMessage.cs" />
+    <Compile Include="CS104\IMessage.cs" />
+    <Compile Include="CS104\Deque.cs" />
+    <Compile Include="CS104\KBuffer.cs" />
+    <Compile Include="CS104\MessageReceiveSendEventArgs.cs" />
+    <Compile Include="CS104\Session.cs" />
+    <Compile Include="CS104\SessionConnetionChangedEventArgs.cs" />
+    <Compile Include="CS104\SessionReconnectHandler.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="CP56Time2a.cs" />
     <Compile Include="SystemUtils.cs" />
