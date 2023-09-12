@@ -16,16 +16,16 @@ namespace cs104_tls_client
 		private static void ConnectionHandler (object parameter, ConnectionEvent connectionEvent)
 		{
 			switch (connectionEvent) {
-			case ConnectionEvent.OPENED:
+			case ConnectionEvent.Opened:
 				Console.WriteLine ("Connected");
 				break;
-			case ConnectionEvent.CLOSED:
+			case ConnectionEvent.Closed:
 				Console.WriteLine ("Connection closed");
 				break;
-			case ConnectionEvent.STARTDT_CON_RECEIVED:
+			case ConnectionEvent.StartDtConReceived:
 				Console.WriteLine ("STARTDT CON received");
 				break;
-			case ConnectionEvent.STOPDT_CON_RECEIVED:
+			case ConnectionEvent.StopDtConReceived:
 				Console.WriteLine ("STOPDT CON received");
 				break;
 			}

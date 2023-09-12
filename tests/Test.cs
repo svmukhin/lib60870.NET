@@ -1077,7 +1077,7 @@ namespace tests
             ASDU asdu = new ASDU (clientParameters, CauseOfTransmission.SPONTANEOUS, false, false, 0, 1, false);
             asdu.AddInformationObject (new SinglePointInformation (100, false, new QualityDescriptor ()));
 
-            connection.SendASDU (asdu);
+            connection.Send (asdu);
 
             Assert.AreEqual (2, connection.GetStatistics ().SentMsgCounter); /* STARTDT + ASDU */
 
@@ -1135,7 +1135,7 @@ namespace tests
             ASDU asdu = new ASDU (clientParameters, CauseOfTransmission.SPONTANEOUS, false, false, 0, 1, false);
             asdu.AddInformationObject (new SinglePointInformation (100, false, new QualityDescriptor ()));
 
-            connection.SendASDU (asdu);
+            connection.Send (asdu);
 
             Assert.AreEqual (2, connection.GetStatistics ().SentMsgCounter); /* STARTDT + ASDU */
 
@@ -1153,7 +1153,7 @@ namespace tests
 
             // Connection is closed. SendASDU should fail
             try {
-                connection.SendASDU (asdu);
+                connection.Send (asdu);
             } catch (ConnectionException e) {
                 ce = e;
             }
@@ -1220,7 +1220,7 @@ namespace tests
                 ASDU asdu = new ASDU (clientParameters, CauseOfTransmission.SPONTANEOUS, false, false, 0, 1, false);
                 asdu.AddInformationObject (new SinglePointInformation (100, false, new QualityDescriptor ()));
 
-                connection.SendASDU (asdu);
+                connection.Send (asdu);
             } catch (ConnectionException) {
             }
 
@@ -1265,7 +1265,7 @@ namespace tests
             ASDU newAsdu = new ASDU (server.GetApplicationLayerParameters (), CauseOfTransmission.ACTIVATION, false, false, 0, 1, false);
             newAsdu.AddInformationObject (new SetpointCommandNormalized (100, sendValue, new SetpointCommandQualifier (false, 0)));
 
-            connection.SendASDU (newAsdu);
+            connection.Send (newAsdu);
 
             while (hasReceived == false)
                 Thread.Sleep (50);
@@ -1312,7 +1312,7 @@ namespace tests
 
             newAsdu.AddInformationObject (new TestInteger32Object (100, sendValue));
 
-            connection.SendASDU (newAsdu);
+            connection.Send (newAsdu);
 
             while (hasReceived == false)
                 Thread.Sleep (50);
@@ -1381,7 +1381,7 @@ namespace tests
             Connection connection = new Connection ("127.0.0.1", 20213);
             connection.Connect ();
 
-            connection.SendASDU (newAsdu);
+            connection.Send (newAsdu);
 
             while (hasReceived == false)
                 Thread.Sleep (50);
