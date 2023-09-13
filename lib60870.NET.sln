@@ -43,7 +43,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs104-redundancy-server", "
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs104-client-file-upload", "examples\cs104-client-file-upload\cs104-client-file-upload.csproj", "{8DAC3BE2-E1C9-4E12-BF11-70FFBAE4C888}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "cs104-client-session", "cs104-client-session\cs104-client-session.csproj", "{82016773-FC59-44C1-84AD-A1B934A2A524}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "cs104-client-session", "examples\cs104-client-session\cs104-client-session.csproj", "{10B4F45B-A844-4923-BA18-DD3F5E913C95}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -175,14 +175,14 @@ Global
 		{8DAC3BE2-E1C9-4E12-BF11-70FFBAE4C888}.Release|Any CPU.ActiveCfg = Release|x86
 		{8DAC3BE2-E1C9-4E12-BF11-70FFBAE4C888}.Release|x86.ActiveCfg = Release|x86
 		{8DAC3BE2-E1C9-4E12-BF11-70FFBAE4C888}.Release|x86.Build.0 = Release|x86
-		{82016773-FC59-44C1-84AD-A1B934A2A524}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{82016773-FC59-44C1-84AD-A1B934A2A524}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{82016773-FC59-44C1-84AD-A1B934A2A524}.Debug|x86.ActiveCfg = Debug|Any CPU
-		{82016773-FC59-44C1-84AD-A1B934A2A524}.Debug|x86.Build.0 = Debug|Any CPU
-		{82016773-FC59-44C1-84AD-A1B934A2A524}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{82016773-FC59-44C1-84AD-A1B934A2A524}.Release|Any CPU.Build.0 = Release|Any CPU
-		{82016773-FC59-44C1-84AD-A1B934A2A524}.Release|x86.ActiveCfg = Release|Any CPU
-		{82016773-FC59-44C1-84AD-A1B934A2A524}.Release|x86.Build.0 = Release|Any CPU
+		{10B4F45B-A844-4923-BA18-DD3F5E913C95}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{10B4F45B-A844-4923-BA18-DD3F5E913C95}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{10B4F45B-A844-4923-BA18-DD3F5E913C95}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{10B4F45B-A844-4923-BA18-DD3F5E913C95}.Debug|x86.Build.0 = Debug|Any CPU
+		{10B4F45B-A844-4923-BA18-DD3F5E913C95}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{10B4F45B-A844-4923-BA18-DD3F5E913C95}.Release|Any CPU.Build.0 = Release|Any CPU
+		{10B4F45B-A844-4923-BA18-DD3F5E913C95}.Release|x86.ActiveCfg = Release|Any CPU
+		{10B4F45B-A844-4923-BA18-DD3F5E913C95}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
